@@ -4,9 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +25,9 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+    @FXML
+    private ImageView btnLogout;
 
     @FXML
     private Label btn_city;
@@ -70,7 +77,20 @@ public class MainController implements Initializable {
 
     }
 
-
+    @FXML
+    void onMouseClickedLogout(MouseEvent event) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../views/login.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.getIcons().add(new Image("img/admin.png"));
+        btnLogout.getScene().getWindow().hide();
+        stage.show();
+    }
 
 
     private void loadUI(String ui) {

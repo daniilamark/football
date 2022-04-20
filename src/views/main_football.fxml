@@ -21,7 +21,7 @@
                </font>
             </Label>
             <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="200.0" styleClass="line-color" stylesheets="@../values/style.css" HBox.hgrow="ALWAYS" />
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+            <ImageView fx:id="btnLogout" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onMouseClickedLogout" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                <image>
                   <Image url="@../img/exit.png" />
                </image>

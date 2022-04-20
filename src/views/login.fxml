@@ -81,7 +81,7 @@
                   </PasswordField>
                   <Pane prefHeight="26.0" prefWidth="27.0">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnShowPassword" fitHeight="20.0" fitWidth="20.0" layoutX="4.0" layoutY="3.0" onMouseClicked="#onMouseClickedBtnShowPassword" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../img/show_pass.png" />
                            </image>

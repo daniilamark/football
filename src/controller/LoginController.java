@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import main.Main;
 
 import java.io.IOException;
@@ -26,6 +30,9 @@ public class LoginController implements Initializable {
     private Label errorMessageLabel;
 
     @FXML
+    private ImageView btnShowPassword;
+
+    @FXML
     private Button btnLogin;
 
     @FXML
@@ -35,6 +42,7 @@ public class LoginController implements Initializable {
     private TextField tfUsername;
 
     private String errorMessage = "";
+
 
     private boolean isFieldFilled() {
         boolean isFilled = true;
@@ -87,7 +95,8 @@ public class LoginController implements Initializable {
             Stage stage = new Stage();
             stage.setMaximized(true);
             stage.setScene(new Scene(root));
-            Main.exit();
+            stage.getIcons().add(new Image("img/admin.png"));
+            btnClose.getScene().getWindow().hide();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -112,5 +121,14 @@ public class LoginController implements Initializable {
                 }
             }
         });
+    }
+
+    @FXML
+    void onMouseClickedBtnShowPassword(MouseEvent event) throws InterruptedException {
+        String maskPassword = pfPassword.getText();
+        errorMessageLabel.setText("Введён пароль: " + maskPassword);
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(e -> errorMessageLabel.setText(""));
+        pause.play();
     }
 }
