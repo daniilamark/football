@@ -1,0 +1,37 @@
+.gradient-background{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #8b00ff, #fe793d);
+}
+
+.line-color{
+    -fx-background-color: #F3ABB5;
+}
+
+.container{
+    -fx-background-color: rgba(251, 198, 208, 0.5);
+    -fx-background-radius: 10;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.2), 10.0, 0.0, 0.0, 10.0);
+}
+
+.transparent{
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+
+
+
+.login-left-side-background{
+    -fx-background-color: #8b00ff;
+}
+
+.login-border{
+    -fx-border-color: #01BED2;
+    -fx-border-width: 1.5;
+}
+
+.login-right-side-border{
+    -fx-border-color: #01BED2;
+    -fx-border-width: 0 1.5 0 0;
+}
