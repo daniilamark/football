@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1315.0" styleClass="gradient-background" stylesheets="@../values/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" styleClass="gradient-background" stylesheets="@../values/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <top>
       <HBox alignment="CENTER" prefHeight="61.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
@@ -68,7 +68,7 @@
                </children>
             </HBox>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1.0" prefWidth="250.0" styleClass="line-color" stylesheets="@../values/style.css" />
-            <VBox prefHeight="595.0" prefWidth="290.0">
+            <VBox prefHeight="382.0" prefWidth="290.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0">
                      <children>
@@ -78,6 +78,20 @@
                            </image>
                         </ImageView>
                         <Label fx:id="btn_city" onMouseClicked="#clickBtnCity" prefHeight="45.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../values/style.css" text="Города" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                           <image>
+                              <Image url="@../img/trainer.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="btn_trainer" onMouseClicked="#clickBtnTrainer" prefHeight="45.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../values/style.css" text="Тренера" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="24.0" />
                            </font>
@@ -134,20 +148,6 @@
                            </image>
                         </ImageView>
                         <Label fx:id="btn_player" onMouseClicked="#clickBtnPlayer" prefHeight="45.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../values/style.css" text="Игроки" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
-                           <image>
-                              <Image url="@../img/trainer.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="btn_trainer" onMouseClicked="#clickBtnTrainer" prefHeight="45.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../values/style.css" text="Тренера" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="24.0" />
                            </font>

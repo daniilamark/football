@@ -9,50 +9,49 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="437.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StadiumController">
+<AnchorPane prefHeight="425.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MathController">
    <children>
       <VBox layoutX="21.0" layoutY="27.0" prefHeight="200.0" prefWidth="123.0" spacing="15.0">
          <children>
-            <Label text="Город">
+            <Label text="Команда №1">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Название">
+            <Label prefHeight="20.0" prefWidth="89.0" text="Команда №2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label prefHeight="20.0" prefWidth="89.0" text="Вметимость">
+            <Label prefHeight="20.0" prefWidth="89.0" text="Дата">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label prefHeight="20.0" prefWidth="89.0" text="Цена билета">
+            <Label prefHeight="20.0" prefWidth="89.0" text="Счёт">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="159.0" layoutY="27.0" prefHeight="188.0" prefWidth="166.0" spacing="10.0">
+      <VBox layoutX="159.0" layoutY="27.0" prefHeight="192.0" prefWidth="197.0" spacing="10.0">
          <children>
-            <TextField fx:id="tfCity" />
-            <TextField fx:id="tfStadiumName" />
-            <TextField fx:id="tfCapacity" />
-            <TextField fx:id="tfTicketPrice" />
+            <TextField fx:id="tfTeam1" />
+            <TextField fx:id="tfTeam2" />
+            <TextField fx:id="tfDate" />
+            <TextField fx:id="tfScore" />
          </children>
       </VBox>
-      <TableView fx:id="tvStadium" layoutX="576.0" layoutY="27.0" prefHeight="347.0" prefWidth="396.0">
+      <TableView fx:id="tvMath" layoutX="396.0" layoutY="27.0" prefHeight="347.0" prefWidth="364.0">
          <columns>
-            <TableColumn fx:id="colCity" prefWidth="83.0" text="Город" />
-            <TableColumn fx:id="colStadiumName" prefWidth="83.0" text="Название" />
-            <TableColumn fx:id="colCapacity" prefWidth="90.0" text="Вместимость" />
-            <TableColumn fx:id="colTicketPrice" prefWidth="90.0" text="Цена билета" />
+            <TableColumn fx:id="colTeam1" prefWidth="83.0" text="Команда №1" />
+            <TableColumn fx:id="colTeam2" prefWidth="101.0" text="Команда №2" />
+            <TableColumn fx:id="colDate" prefWidth="79.0" text="Дата" />
+            <TableColumn fx:id="colScore" prefWidth="90.0" text="Счёт" />
          </columns>
       </TableView>
       <Button fx:id="btnInsert" layoutX="117.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="80.0" text="добавить" />
       <Button fx:id="btnDelete" layoutX="209.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="80.0" text="удалить" />
-      <Button fx:id="btnSelectCity" layoutX="335.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="80.0" text="Выбрать" />
    </children>
 </AnchorPane>

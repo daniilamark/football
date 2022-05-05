@@ -54,12 +54,12 @@ public class MainController implements Initializable {
 
     @FXML
     void clickBtnMath(MouseEvent event) {
-
+        loadUI("../views/ui_math");
     }
 
     @FXML
     void clickBtnPlayer(MouseEvent event) {
-
+        loadUI("../views/ui_player");
     }
 
     @FXML
@@ -69,12 +69,12 @@ public class MainController implements Initializable {
 
     @FXML
     void clickBtnTeam(MouseEvent event) {
-
+        loadUI("../views/ui_team");
     }
 
     @FXML
     void clickBtnTrainer(MouseEvent event) {
-
+        loadUI("../views/ui_trainer");
     }
 
     @FXML

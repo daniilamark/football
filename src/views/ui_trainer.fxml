@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="437.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TrainerController">
+   <children>
+      <VBox layoutX="21.0" layoutY="27.0" prefHeight="200.0" prefWidth="123.0" spacing="15.0">
+         <children>
+            <Label text="Фамилия">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label prefHeight="20.0" prefWidth="89.0" text="Имя">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label prefHeight="20.0" prefWidth="89.0" text="Отчество">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="159.0" layoutY="27.0" prefHeight="192.0" prefWidth="197.0" spacing="10.0">
+         <children>
+            <TextField fx:id="tfFamily" />
+            <TextField fx:id="tfName" />
+            <TextField fx:id="tfLastName" />
+         </children>
+      </VBox>
+      <TableView fx:id="tvTrainer" layoutX="396.0" layoutY="27.0" prefHeight="347.0" prefWidth="303.0">
+         <columns>
+            <TableColumn fx:id="colFamily" prefWidth="83.0" text="Фамилия" />
+            <TableColumn fx:id="colName" prefWidth="106.0" text="Имя" />
+            <TableColumn fx:id="colLastName" prefWidth="109.0" text="Отчество" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnInsert" layoutX="117.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="80.0" text="добавить" />
+      <Button fx:id="btnDelete" layoutX="209.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="80.0" text="удалить" />
+   </children>
+</AnchorPane>

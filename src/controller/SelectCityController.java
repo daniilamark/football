@@ -1,21 +1,24 @@
 package controller;
 
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import main.*;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import main.Const;
+import main.DBHandler;
 import model.City;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,26 +26,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class CityController implements Initializable {
+public class SelectCityController implements Initializable {
 
     @FXML
-    private Button btnDelete;
+    private Button btnCancel;
 
     @FXML
-    private Button btnInsert;
-
-    @FXML
-    private Button btnUpdate;
+    private Button btnChoose;
 
     @FXML
     private TableColumn<City, String> colName;
 
     @FXML
-    private TextField tfCityName;
-
-    @FXML
-    private TableView<City> tvCity;
-
+    private TableView<City> tvSelectCity;
 
     ObservableList<City> cityList;
 
@@ -50,29 +46,24 @@ public class CityController implements Initializable {
 
     @FXML
     void handleButtonAction(ActionEvent event) {
-        if(event.getSource() == btnInsert){
-            insertRecord();
-        }else if(event.getSource() == btnDelete){
-            deleteButton();
+        if(event.getSource() == btnCancel){
+            btnCancel.getScene().getWindow().hide();
+        }else if(event.getSource() == btnChoose){
+
         }
     }
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         showCity();
     }
-
-
 
     public void showCity() {
         ObservableList<City> listCity = getCityList();
 
         colName.setCellValueFactory(new PropertyValueFactory<City, String>(Const.CITY_NAME));
 
-        tvCity.setItems(listCity);
+        tvSelectCity.setItems(listCity);
     }
 
     public ObservableList<City> getCityList() {
@@ -107,28 +98,5 @@ public class CityController implements Initializable {
         return cityList;
     }
 
-    private void insertRecord(){
-        if (Help.isFieldFill(tfCityName) && Help.isString(tfCityName.getText()) ){
-            String query = "INSERT INTO " + Const.CITY_TABLE + "("+ Const.CITY_NAME +")" + " VALUES ('" + tfCityName.getText() + "')";
-            dbHandler.executeQuery(query);
-            showCity();
-            tfCityName.setText("");
-            ShowAlert.showAlertInformation("Результат",  "Запись сделана!");
-        } else {
-            ShowAlert.showAlertInformation("Результат",  "Заполните поле!");
-        }
 
-    }
-
-    private void deleteButton(){
-        String selectedItem = tvCity.getSelectionModel().getSelectedItem().getCity_name();
-        System.out.println(selectedItem);
-
-        //String query = "SET SQL_SAFE_UPDATES = 0; DELETE FROM " + Const.CITY_TABLE + " WHERE "+ Const.CITY_NAME + " = " + "'" + tfCityName.getText() + "';" +  " ";
-        String query = "DELETE FROM " + Const.CITY_TABLE + " WHERE " + Const.CITY_NAME + " = " + "'"+ selectedItem + "'" + ";";
-        dbHandler.executeQuery(query);
-        showCity();
-        tfCityName.setText("");
-    }
 }
-

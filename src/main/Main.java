@@ -21,13 +21,17 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../views/main_football.fxml"));
-        //Parent root = FXMLLoader.load(getClass().getResource("../views/login.fxml"));
         stage.setTitle("Панель организатора");
         stage.getIcons().add(new Image("img/admin.png"));
-        //stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(new Scene(root, 1315, 890));
-        // stage.setScene(new Scene(root));
         stage.setMaximized(true);
+
+
+        //Parent root = FXMLLoader.load(getClass().getResource("../views/login.fxml"));
+        //stage.initStyle(StageStyle.TRANSPARENT);
+        // stage.setScene(new Scene(root));
+
+
         /*
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
