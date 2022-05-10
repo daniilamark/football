@@ -1,6 +1,15 @@
 package main;
 
 public class Const {
+    public static final String UI_LOGIN = "../views/login.fxml";
+    public static final String UI_CITY = "../views/ui_city";
+    public static final String UI_MATH = "../views/ui_math";
+    public static final String UI_PLAYER = "../views/ui_player";
+    public static final String UI_STADIUM = "../views/ui_stadium";
+    public static final String UI_TEAM = "../views/ui_team";
+    public static final String UI_TRAINER = "../views/ui_trainer";
+
+
     public static final String CITY_TABLE = "city";
 
     public static final String CITY_ID = "city_id";

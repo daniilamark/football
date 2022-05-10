@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import main.Const;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,70 +19,62 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-    @FXML
-    private BorderPane borderpane;
+    @FXML private BorderPane borderpane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-    @FXML
-    private ImageView btnLogout;
+    @FXML private ImageView btnLogout;
 
-    @FXML
-    private Label btn_city;
+    @FXML private Label btn_city;
 
-    @FXML
-    private Label btn_math;
+    @FXML private Label btn_math;
 
-    @FXML
-    private Label btn_player;
+    @FXML private Label btn_player;
 
-    @FXML
-    private Label btn_stadium;
+    @FXML private Label btn_stadium;
 
-    @FXML
-    private Label btn_team;
+    @FXML private Label btn_team;
 
-    @FXML
-    private Label btn_trainer;
+    @FXML private Label btn_trainer;
 
     @FXML
     void clickBtnCity(MouseEvent event) {
-        loadUI("../views/ui_city");
+        loadUI(Const.UI_CITY);
     }
 
     @FXML
     void clickBtnMath(MouseEvent event) {
-        loadUI("../views/ui_math");
+        loadUI(Const.UI_MATH);
     }
 
     @FXML
     void clickBtnPlayer(MouseEvent event) {
-        loadUI("../views/ui_player");
+        loadUI(Const.UI_PLAYER);
     }
 
     @FXML
     void clickBtnStadium(MouseEvent event) {
-        loadUI("../views/ui_stadium");
+        loadUI(Const.UI_STADIUM);
     }
 
     @FXML
     void clickBtnTeam(MouseEvent event) {
-        loadUI("../views/ui_team");
+        loadUI(Const.UI_TEAM);
     }
 
     @FXML
     void clickBtnTrainer(MouseEvent event) {
-        loadUI("../views/ui_trainer");
+        loadUI(Const.UI_TRAINER);
     }
 
     @FXML
     void onMouseClickedLogout(MouseEvent event) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../views/login.fxml"));
+            root = FXMLLoader.load(getClass().getResource(Const.UI_LOGIN));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,5 +94,11 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
         borderpane.setCenter(root);
+    }
+
+    public FXMLLoader getLoader(String ui) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(ui + ".fxml"));
+
+        return loader;
     }
 }

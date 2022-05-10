@@ -69,7 +69,6 @@ public class CityController implements Initializable {
 
     public void showCity() {
         ObservableList<City> listCity = getCityList();
-
         colName.setCellValueFactory(new PropertyValueFactory<City, String>(Const.CITY_NAME));
 
         tvCity.setItems(listCity);

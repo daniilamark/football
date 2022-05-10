@@ -1,8 +1,10 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,12 +15,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.Const;
 import main.DBHandler;
+import main.ShowAlert;
 import model.City;
 
 import java.io.IOException;
+import java.lang.constant.Constable;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -44,14 +50,30 @@ public class SelectCityController implements Initializable {
 
     DBHandler dbHandler = new DBHandler();
 
+    private static String res;
+
+    public static StadiumController stadiumController;
+
+
     @FXML
     void handleButtonAction(ActionEvent event) {
         if(event.getSource() == btnCancel){
             btnCancel.getScene().getWindow().hide();
         }else if(event.getSource() == btnChoose){
+            try {
+                String selectedItem = tvSelectCity.getSelectionModel().getSelectedItem().getCity_name();
+                //System.out.println(selectedItem);
+                res = selectedItem;
+                int a = dbHandler.getIdFromName(res);
+                btnChoose.getScene().getWindow().hide();
+                stadiumController.initData();
 
+            } catch (Exception e){
+                ShowAlert.showAlertInformation("Результат",  "Выберите город!");
+            }
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -97,6 +119,42 @@ public class SelectCityController implements Initializable {
 
         return cityList;
     }
+
+
+    public static String getRes(){
+        return res;
+    }
+
+    /*
+    @FXML
+    void clickBtnCancel(ActionEvent event) {
+        btnCancel.getScene().getWindow().hide();
+    }
+
+    @FXML
+    void clickBtnChoose(ActionEvent event) {
+        String selectedItem = tvSelectCity.getSelectionModel().getSelectedItem().getCity_name();
+        //System.out.println(selectedItem);
+        res = selectedItem;
+        btnChoose.getScene().getWindow().hide();
+        stadiumController.initData();
+
+
+        try {
+            String selectedItem = tvSelectCity.getSelectionModel().getSelectedItem().getCity_name();
+            //System.out.println(selectedItem);
+            res = selectedItem;
+            btnChoose.getScene().getWindow().hide();
+            controller1.sendToFirst(res);
+
+        } catch (Exception e){
+            ShowAlert.showAlertInformation("Результат",  "Выберите город!");
+        }
+
+
+    }
+
+     */
 
 
 }

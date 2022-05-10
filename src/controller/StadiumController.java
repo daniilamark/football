@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,15 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import main.Const;
 import main.DBHandler;
 import main.Help;
@@ -55,7 +54,7 @@ public class StadiumController implements Initializable {
     private TableColumn<Stadium, Integer> colTicketPrice;
 
     @FXML
-    private TableColumn<Stadium, String> colCity;
+    private TableColumn<City, String> colCity;
 
     @FXML
     private TextField tfCapacity;
@@ -64,7 +63,7 @@ public class StadiumController implements Initializable {
     private TextField tfStadiumName;
 
     @FXML
-    private TextField tfCity;
+    private TextField tfCity ;
 
     @FXML
     private TextField tfTicketPrice;
@@ -75,22 +74,23 @@ public class StadiumController implements Initializable {
     ObservableList<Stadium> stadiumList;
 
     DBHandler dbHandler = new DBHandler();
+    CityController cityController = new CityController();
 
     private double x, y;
 
     @FXML
     void handleButtonAction(ActionEvent event) throws IOException {
-        if(event.getSource() == btnInsert){
+        if (event.getSource() == btnInsert) {
+            cityController.getCityList();
+
+
             insertRecord();
-        }else if(event.getSource() == btnDelete){
+        } else if (event.getSource() == btnDelete) {
             deleteButton();
-        }else if(event.getSource() == btnSelectCity){
+        } else if (event.getSource() == btnSelectCity) {
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../views/select_city.fxml"));
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setScene(new Scene(root));
-
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/select_city.fxml"));
+            Parent root = loader.load();
             root.setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -107,7 +107,12 @@ public class StadiumController implements Initializable {
                 }
             });
 
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            SelectCityController.stadiumController = this;
             stage.show();
+
         }
     }
 
@@ -117,15 +122,16 @@ public class StadiumController implements Initializable {
     }
 
     public void showStadium() {
-        ObservableList<Stadium> listStadium = getStadiumList();
+        ObservableList<?> listStadium = getStadiumList();
 
-        colCity.setCellValueFactory(new PropertyValueFactory<Stadium, String>(Const.STADIUM_ID));
+        //colCity.setCellValueFactory(new PropertyValueFactory<City, String>(Const.CITY_NAME));
         colStadiumName.setCellValueFactory(new PropertyValueFactory<Stadium, String>(Const.STADIUM_NAME));
         colCapacity.setCellValueFactory(new PropertyValueFactory<Stadium, Integer>(Const.STADIUM_CAPACITY));
         colTicketPrice.setCellValueFactory(new PropertyValueFactory<Stadium, Integer>(Const.STADIUM_TICKET_PRICE));
 
-        tvStadium.setItems(listStadium);
+        tvStadium.setItems((ObservableList<Stadium>) listStadium);
     }
+
 
     public ObservableList<Stadium> getStadiumList() {
         stadiumList = FXCollections.observableArrayList();
@@ -149,7 +155,7 @@ public class StadiumController implements Initializable {
             rs = st.executeQuery(query);
             Stadium stadium;
             while(rs.next()) {
-                stadium = new Stadium(rs.getInt(Const.STADIUM_ID),rs.getInt(Const.STADIUM_CITY_ID), rs.getString(Const.STADIUM_NAME), rs.getInt(Const.STADIUM_CAPACITY), rs.getInt(Const.STADIUM_TICKET_PRICE));
+                stadium = new Stadium(rs.getInt(Const.CITY_ID),rs.getInt(Const.STADIUM_CITY_ID), rs.getString(Const.STADIUM_NAME), rs.getInt(Const.STADIUM_CAPACITY), rs.getInt(Const.STADIUM_TICKET_PRICE));
 
                 stadiumList.add(stadium);
             }
@@ -160,10 +166,14 @@ public class StadiumController implements Initializable {
         return stadiumList;
     }
 
+
+
+
+
     private void insertRecord(){
         if (Help.isFieldFill(tfCity) && Help.isFieldFill(tfStadiumName) && Help.isFieldFill(tfCapacity) && Help.isFieldFill(tfTicketPrice)){
             String query = "INSERT INTO " + Const.STADIUM_TABLE + "("+ Const.STADIUM_CITY_ID + "," + Const.STADIUM_NAME + "," + Const.STADIUM_CAPACITY + "," + Const.STADIUM_TICKET_PRICE +")"
-                    + " VALUES ('" + tfCity.getText() +"'" + ","+"'" +tfStadiumName.getText()+"'" +"," +"'" + tfCapacity.getText()+"'" +"," +"'" + tfTicketPrice.getText()+"')";
+                    + " VALUES ('" + dbHandler.getIdFromName(tfCity.getText()) +"'" + ","+"'" +tfStadiumName.getText()+"'" +"," +"'" + tfCapacity.getText()+"'" +"," +"'" + tfTicketPrice.getText()+"')";
             dbHandler.executeQuery(query);
             showStadium();
             tfCity.setText("");
@@ -177,20 +187,20 @@ public class StadiumController implements Initializable {
 
     }
 
-    private void deleteButton(){
-        int selectedItem = tvStadium.getSelectionModel().getSelectedItem().getStadium_id();
+    private void deleteButton() {
+        String selectedItem = tvStadium.getSelectionModel().getSelectedItem().getStadium_name();
         System.out.println(selectedItem);
-
-        //String query = "SET SQL_SAFE_UPDATES = 0; DELETE FROM " + Const.CITY_TABLE + " WHERE "+ Const.CITY_NAME + " = " + "'" + tfCityName.getText() + "';" +  " ";
-        String query = "DELETE FROM " + Const.STADIUM_TABLE + " WHERE " + Const.STADIUM_ID + " = " + "'"+ selectedItem + "'" + ";";
+        String query = "DELETE FROM " + Const.STADIUM_TABLE + " WHERE " + Const.STADIUM_NAME + " = " + "'"+ selectedItem + "'" + ";";
         dbHandler.executeQuery(query);
+        showStadium();
         tfCity.setText("");
         tfStadiumName.setText("");
         tfCapacity.setText("");
         tfTicketPrice.setText("");
     }
 
-
-
+    public void initData() {
+        tfCity.setText(SelectCityController.getRes());
+    }
 }
 

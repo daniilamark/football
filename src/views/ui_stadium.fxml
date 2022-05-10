@@ -37,7 +37,7 @@
       </VBox>
       <VBox layoutX="159.0" layoutY="27.0" prefHeight="188.0" prefWidth="166.0" spacing="10.0">
          <children>
-            <TextField fx:id="tfCity" />
+            <TextField fx:id="tfCity" editable="false" />
             <TextField fx:id="tfStadiumName" />
             <TextField fx:id="tfCapacity" />
             <TextField fx:id="tfTicketPrice" />
