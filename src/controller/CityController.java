@@ -74,7 +74,7 @@ public class CityController implements Initializable {
         tvCity.setItems(listCity);
     }
 
-    public ObservableList<City> getCityList() {
+    public ObservableList<City> getCityList(){
         cityList = FXCollections.observableArrayList();
 
         Connection conn = null;
@@ -103,6 +103,13 @@ public class CityController implements Initializable {
             ex.printStackTrace();
         }
 
+        /////////////////////////////////////////////////////
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ///////////////////////////////////////////////
         return cityList;
     }
 

@@ -6,6 +6,11 @@ public class Trainer {
     private String name;
     private String last_name;
 
+    public Trainer(int trainer_id, String name) {
+        this.trainer_id = trainer_id;
+        this.name = name;
+    }
+
     public int getTrainer_id() {
         return trainer_id;
     }

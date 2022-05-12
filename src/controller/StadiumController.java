@@ -54,7 +54,7 @@ public class StadiumController implements Initializable {
     private TableColumn<Stadium, Integer> colTicketPrice;
 
     @FXML
-    private TableColumn<City, String> colCity;
+    private TableColumn<Stadium, String> colCity;
 
     @FXML
     private TextField tfCapacity;
@@ -81,9 +81,7 @@ public class StadiumController implements Initializable {
     @FXML
     void handleButtonAction(ActionEvent event) throws IOException {
         if (event.getSource() == btnInsert) {
-            cityController.getCityList();
-
-
+            //cityController.getCityList();
             insertRecord();
         } else if (event.getSource() == btnDelete) {
             deleteButton();
@@ -122,9 +120,9 @@ public class StadiumController implements Initializable {
     }
 
     public void showStadium() {
-        ObservableList<?> listStadium = getStadiumList();
+        ObservableList<Stadium> listStadium = getStadiumList();
 
-        //colCity.setCellValueFactory(new PropertyValueFactory<City, String>(Const.CITY_NAME));
+        colCity.setCellValueFactory(new PropertyValueFactory<>(Const.CITY_NAME));
         colStadiumName.setCellValueFactory(new PropertyValueFactory<Stadium, String>(Const.STADIUM_NAME));
         colCapacity.setCellValueFactory(new PropertyValueFactory<Stadium, Integer>(Const.STADIUM_CAPACITY));
         colTicketPrice.setCellValueFactory(new PropertyValueFactory<Stadium, Integer>(Const.STADIUM_TICKET_PRICE));
@@ -145,9 +143,10 @@ public class StadiumController implements Initializable {
             e.printStackTrace();
         }
 
-        String query = "SELECT " + Const.STADIUM_ID + "," + Const.STADIUM_CITY_ID + ","+ Const.STADIUM_NAME + ","+ Const.STADIUM_CAPACITY
-                + "," + Const.STADIUM_TICKET_PRICE + " FROM " + Const.STADIUM_TABLE;
-
+        String query = "SELECT " + Const.CITY_NAME + ","+ Const.STADIUM_NAME + ","+ Const.STADIUM_CAPACITY
+                + "," + Const.STADIUM_TICKET_PRICE + " FROM " + Const.STADIUM_TABLE + "," + Const.CITY_TABLE
+                + " WHERE " + Const.STADIUM_TABLE + "." + Const.STADIUM_CITY_ID + " = " + Const.CITY_TABLE+ "." + Const.CITY_ID + ";"+"";
+        System.out.println(query);
         Statement st;
         ResultSet rs;
         try {
@@ -155,19 +154,24 @@ public class StadiumController implements Initializable {
             rs = st.executeQuery(query);
             Stadium stadium;
             while(rs.next()) {
-                stadium = new Stadium(rs.getInt(Const.CITY_ID),rs.getInt(Const.STADIUM_CITY_ID), rs.getString(Const.STADIUM_NAME), rs.getInt(Const.STADIUM_CAPACITY), rs.getInt(Const.STADIUM_TICKET_PRICE));
-
+                stadium = new Stadium(rs.getString(Const.CITY_NAME), rs.getString(Const.STADIUM_NAME), rs.getInt(Const.STADIUM_CAPACITY), rs.getInt(Const.STADIUM_TICKET_PRICE));
+                //System.out.println(rs.getString(Const.CITY_NAME));
                 stadiumList.add(stadium);
             }
         } catch(Exception ex) {
             ex.printStackTrace();
         }
 
+        /////////////////////////////////////////////////////
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ///////////////////////////////////////////////
+
         return stadiumList;
     }
-
-
-
 
 
     private void insertRecord(){
@@ -199,7 +203,7 @@ public class StadiumController implements Initializable {
         tfTicketPrice.setText("");
     }
 
-    public void initData() {
+    public void initDataStadium() {
         tfCity.setText(SelectCityController.getRes());
     }
 }

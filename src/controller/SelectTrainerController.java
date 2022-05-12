@@ -12,7 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import main.Const;
 import main.DBHandler;
 import main.ShowAlert;
-import model.City;
+import model.Stadium;
+import model.Trainer;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -21,7 +22,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class SelectCityController implements Initializable {
+public class SelectTrainerController implements Initializable {
 
     @FXML
     private Button btnCancel;
@@ -30,18 +31,17 @@ public class SelectCityController implements Initializable {
     private Button btnChoose;
 
     @FXML
-    private TableColumn<City, String> colName;
+    private TableColumn<Trainer, String> colTrainerName;
 
     @FXML
-    private TableView<City> tvSelectCity;
+    private TableView<Trainer> tvSelectTrainer;
 
-    ObservableList<City> cityList;
+    ObservableList<Trainer> trainerList;
 
     DBHandler dbHandler = new DBHandler();
 
     private static String res;
 
-    public static StadiumController stadiumController;
     public static TeamController teamController;
 
 
@@ -51,21 +51,16 @@ public class SelectCityController implements Initializable {
             btnCancel.getScene().getWindow().hide();
         }else if(event.getSource() == btnChoose){
             try {
-                String selectedItem = tvSelectCity.getSelectionModel().getSelectedItem().getCity_name();
+                String selectedItem = tvSelectTrainer.getSelectionModel().getSelectedItem().getName();
                 //System.out.println(selectedItem);
                 res = selectedItem;
 
                 btnChoose.getScene().getWindow().hide();
 
-                if (teamController.isInitDataTeam()){
-                    teamController.initDataSelectCityForTeam();
-                } else {
-                    stadiumController.initDataStadium();
-                }
-
+                teamController.initDataSelectTrainerForTeam();
 
             } catch (Exception e){
-                ShowAlert.showAlertInformation("Результат",  "Выберите город!");
+                ShowAlert.showAlertInformation("Результат",  "Выберите тренера!");
             }
         }
     }
@@ -73,19 +68,19 @@ public class SelectCityController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        showCity();
+        showTrainer();
     }
 
-    public void showCity() {
-        ObservableList<City> listCity = getCityList();
+    public void showTrainer() {
+        ObservableList<Trainer> listTrainer = getTrainerList();
 
-        colName.setCellValueFactory(new PropertyValueFactory<City, String>(Const.CITY_NAME));
+        colTrainerName.setCellValueFactory(new PropertyValueFactory<Trainer, String>(Const.TRAINER_NAME));
 
-        tvSelectCity.setItems(listCity);
+        tvSelectTrainer.setItems(listTrainer);
     }
 
-    public ObservableList<City> getCityList() {
-        cityList = FXCollections.observableArrayList();
+    public ObservableList<Trainer> getTrainerList() {
+        trainerList = FXCollections.observableArrayList();
 
         Connection conn = null;
         try {
@@ -96,18 +91,18 @@ public class SelectCityController implements Initializable {
             e.printStackTrace();
         }
 
-        String query = "SELECT " + Const.CITY_ID + ","+ Const.CITY_NAME + " FROM " + Const.CITY_TABLE;
+        String query = "SELECT " + Const.TRAINER_ID + ","+ Const.TRAINER_NAME + " FROM " + Const.TRAINER_TABLE;
 
         Statement st;
         ResultSet rs;
         try {
             st = conn.createStatement();
             rs = st.executeQuery(query);
-            City city;
+            Trainer trainer;
             while(rs.next()) {
-                city = new City(rs.getInt(Const.CITY_ID), rs.getString(Const.CITY_NAME));
+                trainer = new Trainer(rs.getInt(Const.TRAINER_ID), rs.getString(Const.TRAINER_NAME));
 
-                cityList.add(city);
+                trainerList.add(trainer);
             }
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -120,7 +115,7 @@ public class SelectCityController implements Initializable {
             e.printStackTrace();
         }
         ///////////////////////////////////////////////
-        return cityList;
+        return trainerList;
     }
 
     public static String getRes(){

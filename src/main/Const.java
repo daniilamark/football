@@ -57,7 +57,7 @@ public class Const {
     public static final String TEAM_STADIUM_ID = "stadium_id";
     public static final String TEAM_TRAINER = "trainer_id";
     public static final String TEAM_CITY_ID = "city_id";
-    public static final String TEAM_TEAM_NAME = "team_name";
+    public static final String TEAM_NAME = "team_name";
     public static final String TEAM_LAST_YEAR_RATING = "last_year_rating";
 
 

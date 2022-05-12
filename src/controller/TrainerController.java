@@ -111,6 +111,13 @@ public class TrainerController implements Initializable {
             ex.printStackTrace();
         }
 
+        /////////////////////////////////////////////////////
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ///////////////////////////////////////////////
         return trainerList;
     }
 

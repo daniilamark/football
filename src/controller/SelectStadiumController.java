@@ -13,6 +13,7 @@ import main.Const;
 import main.DBHandler;
 import main.ShowAlert;
 import model.City;
+import model.Stadium;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -21,7 +22,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class SelectCityController implements Initializable {
+public class SelectStadiumController implements Initializable {
 
     @FXML
     private Button btnCancel;
@@ -30,18 +31,17 @@ public class SelectCityController implements Initializable {
     private Button btnChoose;
 
     @FXML
-    private TableColumn<City, String> colName;
+    private TableColumn<Stadium, String> colStadiumName;
 
     @FXML
-    private TableView<City> tvSelectCity;
+    private TableView<Stadium> tvSelectStadium;
 
-    ObservableList<City> cityList;
+    ObservableList<Stadium> stadiumsList;
 
     DBHandler dbHandler = new DBHandler();
 
     private static String res;
 
-    public static StadiumController stadiumController;
     public static TeamController teamController;
 
 
@@ -51,21 +51,16 @@ public class SelectCityController implements Initializable {
             btnCancel.getScene().getWindow().hide();
         }else if(event.getSource() == btnChoose){
             try {
-                String selectedItem = tvSelectCity.getSelectionModel().getSelectedItem().getCity_name();
+                String selectedItem = tvSelectStadium.getSelectionModel().getSelectedItem().getStadium_name();
                 //System.out.println(selectedItem);
                 res = selectedItem;
 
                 btnChoose.getScene().getWindow().hide();
 
-                if (teamController.isInitDataTeam()){
-                    teamController.initDataSelectCityForTeam();
-                } else {
-                    stadiumController.initDataStadium();
-                }
-
+                teamController.initDataSelectStadiumForTeam();
 
             } catch (Exception e){
-                ShowAlert.showAlertInformation("Результат",  "Выберите город!");
+                ShowAlert.showAlertInformation("Результат",  "Выберите стадион!");
             }
         }
     }
@@ -73,19 +68,19 @@ public class SelectCityController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        showCity();
+        showStadium();
     }
 
-    public void showCity() {
-        ObservableList<City> listCity = getCityList();
+    public void showStadium() {
+        ObservableList<Stadium> listStadium = getStadiumList();
 
-        colName.setCellValueFactory(new PropertyValueFactory<City, String>(Const.CITY_NAME));
+        colStadiumName.setCellValueFactory(new PropertyValueFactory<Stadium, String>(Const.STADIUM_NAME));
 
-        tvSelectCity.setItems(listCity);
+        tvSelectStadium.setItems(listStadium);
     }
 
-    public ObservableList<City> getCityList() {
-        cityList = FXCollections.observableArrayList();
+    public ObservableList<Stadium> getStadiumList() {
+        stadiumsList = FXCollections.observableArrayList();
 
         Connection conn = null;
         try {
@@ -96,18 +91,18 @@ public class SelectCityController implements Initializable {
             e.printStackTrace();
         }
 
-        String query = "SELECT " + Const.CITY_ID + ","+ Const.CITY_NAME + " FROM " + Const.CITY_TABLE;
+        String query = "SELECT " + Const.STADIUM_ID + ","+ Const.STADIUM_NAME + " FROM " + Const.STADIUM_TABLE;
 
         Statement st;
         ResultSet rs;
         try {
             st = conn.createStatement();
             rs = st.executeQuery(query);
-            City city;
+            Stadium stadium;
             while(rs.next()) {
-                city = new City(rs.getInt(Const.CITY_ID), rs.getString(Const.CITY_NAME));
+                stadium = new Stadium(rs.getInt(Const.STADIUM_ID), rs.getString(Const.STADIUM_NAME));
 
-                cityList.add(city);
+                stadiumsList.add(stadium);
             }
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -120,7 +115,7 @@ public class SelectCityController implements Initializable {
             e.printStackTrace();
         }
         ///////////////////////////////////////////////
-        return cityList;
+        return stadiumsList;
     }
 
     public static String getRes(){
