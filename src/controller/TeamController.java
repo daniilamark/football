@@ -87,6 +87,7 @@ public class TeamController implements Initializable {
 
     DBHandler dbHandler = new DBHandler();
     CityController cityController = new CityController();
+    MainController mainController = new MainController();
 
     private double x, y;
 
@@ -171,6 +172,7 @@ public class TeamController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        mainController.setNumUI(2);
         showTeam();
     }
 
@@ -178,7 +180,7 @@ public class TeamController implements Initializable {
         ObservableList<Team> listTeam = getTeamList();
 
         colStadium.setCellValueFactory(new PropertyValueFactory<>(Const.STADIUM_NAME));
-        colTrainer.setCellValueFactory(new PropertyValueFactory<>(Const.STADIUM_CAPACITY));
+        colTrainer.setCellValueFactory(new PropertyValueFactory<>(Const.TRAINER_NAME));
         colCity.setCellValueFactory(new PropertyValueFactory<>(Const.CITY_NAME));
         colName.setCellValueFactory(new PropertyValueFactory<Team, String>(Const.TEAM_NAME));
         colLastRating.setCellValueFactory(new PropertyValueFactory<Team, Integer>(Const.TEAM_LAST_YEAR_RATING));
@@ -201,10 +203,10 @@ public class TeamController implements Initializable {
 
         String query = "SELECT " + Const.STADIUM_NAME+ ","+ Const.TRAINER_NAME + "," + Const.CITY_NAME
                 + "," + Const.TEAM_NAME + "," + Const.TEAM_LAST_YEAR_RATING + " FROM " + Const.STADIUM_TABLE + "," + Const.CITY_TABLE+ "," + Const.TEAM_TABLE + "," + Const.TRAINER_TABLE
-                + " WHERE " + Const.TEAM_TABLE + "." + Const.STADIUM_ID + " = " + Const.STADIUM_ID + "." + Const.STADIUM_ID + // ; ????
-                              Const.TEAM_TABLE + "." + Const.TRAINER_ID + " = " + Const.TRAINER_TABLE + "." + Const.TRAINER_ID  +
-                              Const.TEAM_TABLE + "." + Const.CITY_ID + " = " + Const.CITY_TABLE + "." + Const.CITY_ID + ";" + "";
-        System.out.println(query);
+                + " WHERE " + Const.TEAM_TABLE + "." + Const.STADIUM_ID + " = " + Const.STADIUM_TABLE + "." + Const.STADIUM_ID + " AND " // ; ????
+                            +  Const.TEAM_TABLE + "." + Const.TRAINER_ID + " = " + Const.TRAINER_TABLE + "." + Const.TRAINER_ID  + " AND "
+                            +  Const.TEAM_TABLE + "." + Const.CITY_ID + " = " + Const.CITY_TABLE + "." + Const.CITY_ID + ";" + "";
+        //System.out.println(query);
         Statement st;
         ResultSet rs;
         try {
@@ -214,6 +216,8 @@ public class TeamController implements Initializable {
             while(rs.next()) {
                 team = new Team(rs.getString(Const.STADIUM_NAME), rs.getString(Const.TRAINER_NAME), rs.getString(Const.CITY_NAME), rs.getString(Const.TEAM_NAME), rs.getInt(Const.TEAM_LAST_YEAR_RATING));
                 //System.out.println(rs.getString(Const.CITY_NAME));
+                //System.out.println(rs.getString(Const.TRAINER_NAME));
+                //System.out.println(rs.getString(Const.STADIUM_NAME));
                 teamList.add(team);
             }
         } catch(Exception ex) {
@@ -235,9 +239,10 @@ public class TeamController implements Initializable {
     private void insertRecord() {
         if (Help.isFieldFill(tfStadium) && Help.isFieldFill(tfTrainer) && Help.isFieldFill(tfCity) && Help.isFieldFill(tfName) && Help.isFieldFill(tfLastRating)) {
             String query = "INSERT INTO " + Const.TEAM_TABLE + "(" + Const.STADIUM_ID + "," + Const.TRAINER_ID + "," + Const.CITY_ID + "," + Const.TEAM_NAME + "," + Const.TEAM_LAST_YEAR_RATING +")"
-                    + " VALUES ('" + dbHandler.getIdFromName(tfStadium.getText()) + "' , '" + dbHandler.getIdFromName(tfTrainer.getText()) + "' , '" + dbHandler.getIdFromName(tfCity.getText()) + "' , '"
-                    + tfName.getText() + "' , '" + tfLastRating.getText() + "')";
+                    + " VALUES ('" + dbHandler.getIdFromName(tfStadium.getText(), "stadium")+"'"+","+"'"+dbHandler.getIdFromName(tfTrainer.getText(), "trainer")+"'"+","+"'"+dbHandler.getIdFromName(tfCity.getText(), "city") + "'"+","+"'"
+                    + tfName.getText() + "'"+","+"'"+tfLastRating.getText() + "')";
             dbHandler.executeQuery(query);
+            System.out.println(query);
             showTeam();
             tfStadium.setText("");
             tfTrainer.setText("");
@@ -262,6 +267,7 @@ public class TeamController implements Initializable {
         tfCity.setText("");
         tfName.setText("");
         tfLastRating.setText("");
+        btnDelete.setDisable(true);
     }
 
     public void initDataSelectCityForTeam() {
@@ -280,5 +286,8 @@ public class TeamController implements Initializable {
         return true;
     }
 
+    public void clickItem(MouseEvent event) {
+        btnDelete.setDisable(false);
+    }
 }
 

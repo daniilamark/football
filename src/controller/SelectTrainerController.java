@@ -51,7 +51,7 @@ public class SelectTrainerController implements Initializable {
             btnCancel.getScene().getWindow().hide();
         }else if(event.getSource() == btnChoose){
             try {
-                String selectedItem = tvSelectTrainer.getSelectionModel().getSelectedItem().getName();
+                String selectedItem = tvSelectTrainer.getSelectionModel().getSelectedItem().getTrainer_name();
                 //System.out.println(selectedItem);
                 res = selectedItem;
 

@@ -34,10 +34,11 @@ public class DBHandler extends ConfigsDb{
             st.executeUpdate(query);
         }catch(Exception ex){
             ex.printStackTrace();
+            ShowAlert.showAlertInformation("Результат удаления",  "Данные используются в другой таблице!");
         }
     }
 
-    public int getIdFromName(String name){
+    public int getIdFromName(String name, String entity){
         Connection conn = null;
         try {
             conn = getDBConnection();
@@ -46,7 +47,15 @@ public class DBHandler extends ConfigsDb{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String query = "SELECT city_id FROM city WHERE city_name = '"+ name + "'";
+        String query = "";
+        if (entity == "city") {
+            query = "SELECT city_id FROM city WHERE city_name = '"+ name + "'";
+        } else if (entity == "stadium") {
+            query = "SELECT stadium_id FROM stadium WHERE stadium_name = '"+ name + "'";
+        } else if (entity == "trainer") {
+            query = "SELECT trainer_id FROM trainer WHERE trainer_name = '"+ name + "'";
+        }
+
         //String query = "SELECT city_id FROM city";
 
         Statement st;
@@ -56,8 +65,14 @@ public class DBHandler extends ConfigsDb{
             rs = st.executeQuery(query);
 
             while(rs.next()) {
-                id = rs.getInt(Const.CITY_ID);
-                System.out.println(id);
+                if (entity == "city") {
+                    id = rs.getInt(Const.CITY_ID);
+                } else if (entity == "stadium") {
+                    id = rs.getInt(Const.STADIUM_ID);
+                } else if (entity == "trainer") {
+                    id = rs.getInt(Const.TRAINER_ID);
+                }
+
             }
         } catch(Exception ex) {
             ex.printStackTrace();

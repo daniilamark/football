@@ -75,6 +75,7 @@ public class StadiumController implements Initializable {
 
     DBHandler dbHandler = new DBHandler();
     CityController cityController = new CityController();
+    MainController mainController = new MainController();
 
     private double x, y;
 
@@ -116,6 +117,7 @@ public class StadiumController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        mainController.setNumUI(1);
         showStadium();
     }
 
@@ -177,7 +179,7 @@ public class StadiumController implements Initializable {
     private void insertRecord(){
         if (Help.isFieldFill(tfCity) && Help.isFieldFill(tfStadiumName) && Help.isFieldFill(tfCapacity) && Help.isFieldFill(tfTicketPrice)){
             String query = "INSERT INTO " + Const.STADIUM_TABLE + "("+ Const.STADIUM_CITY_ID + "," + Const.STADIUM_NAME + "," + Const.STADIUM_CAPACITY + "," + Const.STADIUM_TICKET_PRICE +")"
-                    + " VALUES ('" + dbHandler.getIdFromName(tfCity.getText()) +"'" + ","+"'" +tfStadiumName.getText()+"'" +"," +"'" + tfCapacity.getText()+"'" +"," +"'" + tfTicketPrice.getText()+"')";
+                    + " VALUES ('" + dbHandler.getIdFromName(tfCity.getText(), "city") +"'" + ","+"'" +tfStadiumName.getText()+"'" +"," +"'" + tfCapacity.getText()+"'" +"," +"'" + tfTicketPrice.getText()+"')";
             dbHandler.executeQuery(query);
             showStadium();
             tfCity.setText("");
@@ -201,10 +203,20 @@ public class StadiumController implements Initializable {
         tfStadiumName.setText("");
         tfCapacity.setText("");
         tfTicketPrice.setText("");
+        btnDelete.setDisable(true);
     }
 
     public void initDataStadium() {
         tfCity.setText(SelectCityController.getRes());
+    }
+
+    public boolean isInitDataStadiumFromCity() {
+        return true;
+    }
+
+    public void clickItem(MouseEvent event) {
+        btnDelete.setDisable(false);
+
     }
 }
 

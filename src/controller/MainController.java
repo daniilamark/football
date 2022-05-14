@@ -19,11 +19,14 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    StadiumController stadiumController;
+    TeamController teamController;
+
     @FXML private BorderPane borderpane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        SelectCityController.mainController = this; //////////////////////
     }
 
     @FXML private ImageView btnLogout;
@@ -39,6 +42,16 @@ public class MainController implements Initializable {
     @FXML private Label btn_team;
 
     @FXML private Label btn_trainer;
+
+    private int numUI = 0;
+
+    public int getNumUI() {
+        return numUI;
+    }
+
+    public void setNumUI(int numUI) {
+        this.numUI = numUI;
+    }
 
     @FXML
     void clickBtnCity(MouseEvent event) {
@@ -58,11 +71,13 @@ public class MainController implements Initializable {
     @FXML
     void clickBtnStadium(MouseEvent event) {
         loadUI(Const.UI_STADIUM);
+        setNumUI(1);
     }
 
     @FXML
     void clickBtnTeam(MouseEvent event) {
         loadUI(Const.UI_TEAM);
+        setNumUI(2);
     }
 
     @FXML

@@ -43,6 +43,7 @@ public class SelectCityController implements Initializable {
 
     public static StadiumController stadiumController;
     public static TeamController teamController;
+    public static MainController mainController;
 
 
     @FXML
@@ -56,16 +57,38 @@ public class SelectCityController implements Initializable {
                 res = selectedItem;
 
                 btnChoose.getScene().getWindow().hide();
+                //stadiumController.initDataStadium();
 
+                /*
                 if (teamController.isInitDataTeam()){
                     teamController.initDataSelectCityForTeam();
-                } else {
+                }else {
                     stadiumController.initDataStadium();
                 }
 
+                 */
 
-            } catch (Exception e){
+                //System.out.println(1);
+                switch (mainController.getNumUI()) {
+
+                    case 0:
+
+                    case 1:
+                        //System.out.println(2);
+                        stadiumController.initDataStadium();
+                    case 2:
+                        //System.out.println(3);
+                        teamController.initDataSelectCityForTeam();
+                }
+                //System.out.println(4);
+
+
+
+
+            } catch (ExceptionInInitializerError e){
+                /////////////////////// ВОЗМОЖНО ДРУГОЕ ИСКЛЧЕНИЕ НО ТЕПЕРЬ РАБОТАЕТ КАК_ТО
                 ShowAlert.showAlertInformation("Результат",  "Выберите город!");
+                System.out.println(e);
             }
         }
     }

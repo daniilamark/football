@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Main;
+import main.ShowAlert;
 
 import java.io.IOException;
 import java.net.URL;
@@ -94,6 +95,7 @@ public class LoginController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("../views/main_football.fxml"));
             Stage stage = new Stage();
             stage.setMaximized(true);
+            stage.setResizable(false);
             stage.setScene(new Scene(root));
             stage.getIcons().add(new Image("img/admin.png"));
             btnClose.getScene().getWindow().hide();

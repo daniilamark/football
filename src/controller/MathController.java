@@ -5,11 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import main.Const;
 import main.DBHandler;
 import model.City;
@@ -28,6 +26,12 @@ public class MathController implements Initializable {
 
     @FXML
     private Button btnInsert;
+    
+    @FXML
+    private Button btnSelectTeam1;
+
+    @FXML
+    private Button btnSelectTeam2;
 
     @FXML
     private TableColumn<?, ?> colDate;
@@ -42,7 +46,7 @@ public class MathController implements Initializable {
     private TableColumn<?, ?> colTeam2;
 
     @FXML
-    private TextField tfDate;
+    private DatePicker dpDate;
 
     @FXML
     private TextField tfScore;
@@ -67,5 +71,9 @@ public class MathController implements Initializable {
 
     }
 
+    public void clickItem(MouseEvent event) {
+        btnDelete.setDisable(false);
+
+    }
 }
 

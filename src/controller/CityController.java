@@ -17,10 +17,7 @@ import main.*;
 import model.City;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class CityController implements Initializable {
@@ -132,9 +129,17 @@ public class CityController implements Initializable {
 
         //String query = "SET SQL_SAFE_UPDATES = 0; DELETE FROM " + Const.CITY_TABLE + " WHERE "+ Const.CITY_NAME + " = " + "'" + tfCityName.getText() + "';" +  " ";
         String query = "DELETE FROM " + Const.CITY_TABLE + " WHERE " + Const.CITY_NAME + " = " + "'"+ selectedItem + "'" + ";";
+
         dbHandler.executeQuery(query);
         showCity();
         tfCityName.setText("");
+        btnDelete.setDisable(true);
     }
+    public void clickItem(MouseEvent event) {
+        btnDelete.setDisable(false);
+
+    }
+
+
 }
 

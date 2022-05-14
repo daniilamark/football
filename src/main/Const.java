@@ -66,6 +66,6 @@ public class Const {
 
     public static final String TRAINER_ID = "trainer_id";
     public static final String TRAINER_FAMILY = "family";
-    public static final String TRAINER_NAME = "name";
+    public static final String TRAINER_NAME = "trainer_name";
     public static final String TRAINER_LAST_NAME = "last_name";
 }
