@@ -282,10 +282,6 @@ public class TeamController implements Initializable {
         tfTrainer.setText(SelectTrainerController.getRes());
     }
 
-    public boolean isInitDataTeam() {
-        return true;
-    }
-
     public void clickItem(MouseEvent event) {
         btnDelete.setDisable(false);
     }

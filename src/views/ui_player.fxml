@@ -2,11 +2,13 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayerController">
@@ -59,7 +61,7 @@
                   </TextField>
                </children>
             </VBox>
-            <TableView fx:id="tvPlayer" layoutX="350.0" layoutY="20.0" prefHeight="378.0" prefWidth="607.0" stylesheets="@../values/style.css">
+            <TableView fx:id="tvPlayer" layoutX="350.0" layoutY="20.0" onMouseClicked="#clickItem" prefHeight="378.0" prefWidth="607.0" stylesheets="@../values/style.css">
                <columns>
                   <TableColumn fx:id="colTeam" prefWidth="83.0" text="Команда" />
                   <TableColumn fx:id="colFamily" prefWidth="83.0" text="Фамилия" />
@@ -70,6 +72,29 @@
                   <TableColumn fx:id="colNumber" prefWidth="132.0" text="Номер" />
                </columns>
             </TableView>
+            <Button fx:id="btnSelectTeam" layoutX="236.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="80.0" stylesheets="@../values/style.css" text="Выбрать">
+               <styleClass>
+                  <String fx:value="search-box" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
+            <HBox alignment="CENTER" layoutX="20.0" layoutY="275.0" prefHeight="25.0" prefWidth="200.0" spacing="40.0">
+               <children>
+                  <Button fx:id="btnInsert" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="80.0" stylesheets="@../values/style.css" text="Добавить">
+                     <styleClass>
+                        <String fx:value="search-box" />
+                        <String fx:value="shadow" />
+                        <String fx:value="button" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="btnDelete" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="80.0" stylesheets="@../values/style.css" text="Удалить">
+                     <styleClass>
+                        <String fx:value="search-box" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

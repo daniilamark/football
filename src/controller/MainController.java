@@ -56,33 +56,71 @@ public class MainController implements Initializable {
     @FXML
     void clickBtnCity(MouseEvent event) {
         loadUI(Const.UI_CITY);
+        btn_city.setText("Города <");
+        btn_trainer.setText("Тренера");
+        btn_stadium.setText("Стадионы");
+        btn_team.setText("Команды");
+        btn_math.setText("Матчи");
+        btn_player.setText("Игроки");
     }
 
     @FXML
     void clickBtnMath(MouseEvent event) {
         loadUI(Const.UI_MATH);
+        setNumUI(3);
+        btn_city.setText("Города");
+        btn_trainer.setText("Тренера");
+        btn_stadium.setText("Стадионы");
+        btn_team.setText("Команды");
+        btn_math.setText("Матчи <");
+        btn_player.setText("Игроки");
     }
 
     @FXML
     void clickBtnPlayer(MouseEvent event) {
         loadUI(Const.UI_PLAYER);
+        setNumUI(4);
+        btn_city.setText("Города");
+        btn_trainer.setText("Тренера");
+        btn_stadium.setText("Стадионы");
+        btn_team.setText("Команды");
+        btn_math.setText("Матчи");
+        btn_player.setText("Игроки <");
     }
 
     @FXML
     void clickBtnStadium(MouseEvent event) {
         loadUI(Const.UI_STADIUM);
         setNumUI(1);
+        btn_city.setText("Города");
+        btn_trainer.setText("Тренера");
+        btn_stadium.setText("Стадионы <");
+        btn_team.setText("Команды");
+        btn_math.setText("Матчи");
+        btn_player.setText("Игроки");
     }
 
     @FXML
     void clickBtnTeam(MouseEvent event) {
         loadUI(Const.UI_TEAM);
         setNumUI(2);
+        btn_city.setText("Города");
+        btn_trainer.setText("Тренера");
+        btn_stadium.setText("Стадионы");
+        btn_team.setText("Команды <");
+        btn_math.setText("Матчи");
+        btn_player.setText("Игроки");
     }
 
     @FXML
     void clickBtnTrainer(MouseEvent event) {
         loadUI(Const.UI_TRAINER);
+        btn_city.setText("Города");
+        btn_trainer.setText("Тренера <");
+        btn_stadium.setText("Стадионы");
+        btn_team.setText("Команды");
+        btn_math.setText("Матчи");
+        btn_player.setText("Игроки");
     }
 
     @FXML

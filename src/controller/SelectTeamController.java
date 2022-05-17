@@ -13,6 +13,7 @@ import main.Const;
 import main.DBHandler;
 import main.ShowAlert;
 import model.City;
+import model.Team;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -21,7 +22,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class SelectCityController implements Initializable {
+public class SelectTeamController implements Initializable {
 
     @FXML
     private Button btnCancel;
@@ -30,19 +31,21 @@ public class SelectCityController implements Initializable {
     private Button btnChoose;
 
     @FXML
-    private TableColumn<City, String> colName;
+    private TableColumn<Team, String> colName;
 
     @FXML
-    private TableView<City> tvSelectCity;
+    private TableView<Team> tvSelectTeam;
 
-    ObservableList<City> cityList;
+    ObservableList<Team> teamList;
 
     DBHandler dbHandler = new DBHandler();
 
-    private static String res;
+    private static String res1;
+    private static String res2;
 
-    public static StadiumController stadiumController;
     public static TeamController teamController;
+    public static MathController mathController;
+    public static PlayerController playerController;
     public static MainController mainController;
 
 
@@ -52,34 +55,38 @@ public class SelectCityController implements Initializable {
             btnCancel.getScene().getWindow().hide();
         }else if(event.getSource() == btnChoose){
             try {
-                String selectedItem = tvSelectCity.getSelectionModel().getSelectedItem().getCity_name();
+                String selectedItem = tvSelectTeam.getSelectionModel().getSelectedItem().getTeam_name();
                 //System.out.println(selectedItem);
-                res = selectedItem;
+                res1 = selectedItem;
 
                 btnChoose.getScene().getWindow().hide();
                 //stadiumController.initDataStadium();
 
-                /*
-                if (teamController.isInitDataTeam()){
-                    teamController.initDataSelectCityForTeam();
-                }else {
-                    stadiumController.initDataStadium();
-                }
 
-                 */
-
-                //System.out.println(1);
+                //mathController.initDataTeam2FromMath();
+                playerController.initDataPlayerFromTeam();
+                mathController.initDataTeam1FromMath();
+                mathController.initDataTeam2FromMath();
                 switch (mainController.getNumUI()) {
-
                     case 0:
 
-                    case 1:
-                        //System.out.println(1);
-                        stadiumController.initDataStadium();
-                    case 2:
-                        //System.out.println(2);
-                        teamController.initDataSelectCityForTeam();
+                    case 3:
+                        System.out.println(3); // math
+
+                        switch (mathController.getNumTeam()){
+                            case 1:
+                                mathController.initDataTeam1FromMath();
+
+                            case 2:
+                                mathController.initDataTeam2FromMath();
+                        }
+                    case 4:
+                        System.out.println(4); // player
+
                 }
+
+
+
                 //System.out.println(4);
 
 
@@ -96,19 +103,19 @@ public class SelectCityController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        showCity();
+        showTeam();
     }
 
-    public void showCity() {
-        ObservableList<City> listCity = getCityList();
+    public void showTeam() {
+        ObservableList<Team> listTeam = getTeamList();
 
-        colName.setCellValueFactory(new PropertyValueFactory<City, String>(Const.CITY_NAME));
+        colName.setCellValueFactory(new PropertyValueFactory<Team, String>(Const.TEAM_NAME));
 
-        tvSelectCity.setItems(listCity);
+        tvSelectTeam.setItems(listTeam);
     }
 
-    public ObservableList<City> getCityList() {
-        cityList = FXCollections.observableArrayList();
+    public ObservableList<Team> getTeamList() {
+        teamList = FXCollections.observableArrayList();
 
         Connection conn = null;
         try {
@@ -119,18 +126,18 @@ public class SelectCityController implements Initializable {
             e.printStackTrace();
         }
 
-        String query = "SELECT " + Const.CITY_ID + ","+ Const.CITY_NAME + " FROM " + Const.CITY_TABLE;
+        String query = "SELECT " + Const.TEAM_ID + ","+ Const.TEAM_NAME + " FROM " + Const.TEAM_TABLE;
 
         Statement st;
         ResultSet rs;
         try {
             st = conn.createStatement();
             rs = st.executeQuery(query);
-            City city;
+            Team team;
             while(rs.next()) {
-                city = new City(rs.getInt(Const.CITY_ID), rs.getString(Const.CITY_NAME));
+                team = new Team(rs.getInt(Const.TEAM_ID), rs.getString(Const.TEAM_NAME));
 
-                cityList.add(city);
+                teamList.add(team);
             }
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -143,11 +150,14 @@ public class SelectCityController implements Initializable {
             e.printStackTrace();
         }
         ///////////////////////////////////////////////
-        return cityList;
+        return teamList;
     }
 
-    public static String getRes(){
-        return res;
+    public static String getRes1(){
+        return res1;
+    }
+    public static String getRes2(){
+        return res2;
     }
 
 }

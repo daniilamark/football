@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
     private String errorMessage = "";
 
 
-    private boolean isFieldFilled() {
+    public boolean isFieldFilled() {
         boolean isFilled = true;
 
         if (tfUsername.getText().isEmpty()){
@@ -69,7 +69,7 @@ public class LoginController implements Initializable {
     }
 
 
-    private boolean isValid(){
+    public boolean isValid(){
         boolean isValid = true;
 
         if (!tfUsername.getText().equals(Main.USERNAME)){
@@ -132,5 +132,10 @@ public class LoginController implements Initializable {
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(e -> errorMessageLabel.setText(""));
         pause.play();
+    }
+
+    @FXML
+    void onClickRegistration(MouseEvent event) {
+
     }
 }

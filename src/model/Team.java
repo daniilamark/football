@@ -18,6 +18,12 @@ public class Team {
         this.team_name = team_name;
         this.last_year_rating = last_year_rating;
     }
+
+    public Team(int team_id, String team_name) {
+        this.team_id = team_id;
+        this.team_name = team_name;
+    }
+
     public String getTrainer_name() {
         return trainer_name;
     }

@@ -14,6 +14,18 @@ import java.io.IOException;
 
 public class Main extends Application {
 
+    // TODO
+    // регистрация пользователей
+    // создание админов
+    // аунтификация
+    // доработать БД
+    // вью юзера
+    // доработать игроков бд и матчи
+    // комментарии в код
+    // документация и презентация
+    // бд в облаке и EXE файл
+
+
     public static final String USERNAME = "admin";
     public static final String PASSWORD = "1";
     private double x, y;

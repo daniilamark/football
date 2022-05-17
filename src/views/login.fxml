@@ -104,14 +104,36 @@
                   <Insets left="50.0" right="50.0" top="30.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="btnLogin" mnemonicParsing="false" prefHeight="25.0" prefWidth="283.0" styleClass="login-left-side-background" stylesheets="@../values/style.css" text="Войти" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="50.0" right="50.0" top="30.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-            </Button>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="268.0" styleClass="login-border">
+               <children>
+                  <Button fx:id="btnLogin" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" stylesheets="@../values/style.css" text="Войти">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="search-box" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="135.0" prefWidth="350.0" styleClass="login-border">
+               <children>
+                  <Label fx:id="lRegistration" onMouseClicked="#onClickRegistration" prefHeight="17.0" prefWidth="93.0" text="Нет аккаунта" textAlignment="CENTER" underline="true" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </HBox>
          </children>
       </VBox>
    </children>

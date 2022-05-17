@@ -54,6 +54,8 @@ public class DBHandler extends ConfigsDb{
             query = "SELECT stadium_id FROM stadium WHERE stadium_name = '"+ name + "'";
         } else if (entity == "trainer") {
             query = "SELECT trainer_id FROM trainer WHERE trainer_name = '"+ name + "'";
+        } else if (entity == "team") {
+            query = "SELECT team_id FROM team WHERE team_name = '" + name + "'";
         }
 
         //String query = "SELECT city_id FROM city";
@@ -71,6 +73,8 @@ public class DBHandler extends ConfigsDb{
                     id = rs.getInt(Const.STADIUM_ID);
                 } else if (entity == "trainer") {
                     id = rs.getInt(Const.TRAINER_ID);
+                } else if (entity == "team") {
+                    id = rs.getInt(Const.TEAM_ID);
                 }
 
             }
