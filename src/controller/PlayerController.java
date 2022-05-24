@@ -242,7 +242,7 @@ public class PlayerController implements Initializable {
         btnDelete.setDisable(true);
     }
 
-    public void initDataPlayerFromTeam() {
+    public void initDataTeamFromPlayer() {
         tfTeam.setText(SelectTeamController.getRes());
     }
 

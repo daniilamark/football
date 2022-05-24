@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class    SelectTeamController implements Initializable {
+public class SelectTeam1Controller implements Initializable {
 
     @FXML
     private Button btnCancel;
@@ -43,6 +43,7 @@ public class    SelectTeamController implements Initializable {
 
     public static TeamController teamController;
 
+    public static MathController mathController = new MathController();
     public static MathController mathController1 = new MathController();
 
     public static PlayerController playerController;
@@ -63,49 +64,8 @@ public class    SelectTeamController implements Initializable {
                 //res1 = selectedItem2;
 
                 btnChoose.getScene().getWindow().hide();
-                //stadiumController.initDataStadium();
 
-
-                //mathController.initDataTeam2FromMath();
-                playerController.initDataTeamFromPlayer();
-
-                mathController1.initDataTeam1FromMath();
-
-
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //mathController2.initDataTeam2FromMath();
-                    }
-                }).start();
-
-                /*
-                switch (mainController.getNumUI()) {
-                    case 0:
-
-                    case 3:
-                        System.out.println(3); // math
-
-                        switch (mathController.getNumTeam()){
-                            case 1:
-                                mathController.initDataTeam1FromMath();
-
-                            case 2:
-                                mathController.initDataTeam2FromMath();
-                        }
-                    case 4:
-                        System.out.println(4); // player
-
-                }
-
-
-
-
-                 */
-                //System.out.println(4);
-
-
+                mathController1.initDataTeam2FromMath();
 
 
             } catch (ExceptionInInitializerError e){
