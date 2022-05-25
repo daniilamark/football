@@ -18,23 +18,21 @@ import main.Const;
 import main.DBHandler;
 import main.Help;
 import main.ShowAlert;
-import model.*;
 import model.Math;
+import model.Math1;
+import model.Math2;
+import model.Math3;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class MathController implements Initializable {
+public class MathUserController implements Initializable {
 
-    @FXML private Button btnDelete;
-
-    @FXML private Button btnInsert;
-
-    @FXML private Button btnSelectTeam1;
-
-    @FXML private Button btnSelectTeam2;
 
     @FXML private TableColumn<Math3, String> colData;
 
@@ -44,13 +42,6 @@ public class MathController implements Initializable {
 
     @FXML private TableColumn<Math1, String> colTeam2;
 
-    @FXML private DatePicker dpDate;
-
-    @FXML private TextField tfScore;
-
-    @FXML private TextField tfTeam1;
-
-    @FXML private TextField tfTeam2;
 
     @FXML private TableView<Math3> tvMathData;
 
@@ -68,72 +59,6 @@ public class MathController implements Initializable {
     DBHandler dbHandler = new DBHandler();
     TeamController teamController = new TeamController();
     MainController mainController = new MainController();
-
-    private double x, y;
-    private int numTeam = 0;
-    @FXML
-    void handleButtonAction(ActionEvent event) throws IOException {
-        if (event.getSource() == btnInsert) {
-            //cityController.getCityList();
-            insertRecord();
-        } else if (event.getSource() == btnDelete) {
-            deleteButton();
-        } else if (event.getSource() == btnSelectTeam1) {
-            Stage stage = new Stage();
-            setNumTeam(1);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/select_team.fxml"));
-            Parent root = loader.load();
-            root.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    x = mouseEvent.getSceneX();
-                    y = mouseEvent.getSceneY();
-                }
-            });
-
-            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    stage.setX(mouseEvent.getScreenX() - x);
-                    stage.setY(mouseEvent.getScreenY() - y);
-                }
-            });
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.TRANSPARENT);
-            SelectTeamController.mathController1 = this;
-            stage.show();
-        }
-
-        else if (event.getSource() == btnSelectTeam2) {
-            Stage stage = new Stage();
-            setNumTeam(2);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/select_team1.fxml"));
-            Parent root = loader.load();
-            root.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    x = mouseEvent.getSceneX();
-                    y = mouseEvent.getSceneY();
-                }
-            });
-
-            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    stage.setX(mouseEvent.getScreenX() - x);
-                    stage.setY(mouseEvent.getScreenY() - y);
-                }
-            });
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.TRANSPARENT);
-            SelectTeam1Controller.mathController1 = this;
-            stage.show();
-        }
-    }
 
 
     @Override
@@ -362,77 +287,5 @@ public class MathController implements Initializable {
         ///////////////////////////////////////////////
 
         return dateList;
-    }
-
-
-    private void insertRecord(){
-        if (Help.isFieldFill(tfTeam1) && Help.isFieldFill(tfTeam2) && Help.isFieldFill(tfScore) && Help.isFieldFill(dpDate)){
-            String query = "INSERT INTO " + Const.MATH_TABLE + "("+ Const.MATH_TEAM_ID_1 + "," + Const.MATH_TEAM_ID_2 + "," + Const.MATH_DATE + "," + Const.MATH_SCORE +")"
-                    + " VALUES ('" + dbHandler.getIdFromName(tfTeam1.getText(), "team") +"'" + ","+"'" + dbHandler.getIdFromName(tfTeam2.getText(), "team") +"'" +"," +"'" + dpDate.getValue()+"'" +"," +"'" + tfScore.getText()+"')";
-            System.out.println("testttttttttttt");
-            System.out.println(query);
-            dbHandler.executeQuery(query);
-            showTeam1();
-            showTeam2();
-            showScore();
-            showDate();
-            tfTeam1.setText("");
-            tfTeam2.setText("");
-            dpDate.setValue(null);
-            tfScore.setText("");
-            ShowAlert.showAlertInformation("Результат",  "Запись сделана!");
-        } else {
-            ShowAlert.showAlertInformation("Результат",  "Заполните поле!");
-        }
-
-    }
-
-    private void deleteButton() {
-        int selectedItem = tvMathTeam1.getSelectionModel().getSelectedItem().getMath_id();
-        System.out.println(selectedItem);
-        String query = "DELETE FROM " + Const.MATH_TABLE + " WHERE " + Const.MATH_ID + " = " + "'"+ selectedItem + "'" + ";";
-        dbHandler.executeQuery(query);
-        showTeam1();
-        showTeam2();
-        showScore();
-        showDate();
-        tfTeam1.setText("");
-        tfTeam2.setText("");
-        dpDate.setValue(null);
-        tfScore.setText("");
-        btnDelete.setDisable(true);
-    }
-
-    public void initDataTeam1FromMath() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                tfTeam1.setText(SelectTeamController.getRes());
-            }
-        }).start();
-
-    }
-
-
-    public void initDataTeam2FromMath() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                tfTeam2.setText(SelectTeam1Controller.getRes());
-            }
-        }).start();
-    }
-
-    public void setNumTeam(int num) {
-        this.numTeam = num;
-    }
-
-    public int getNumTeam() {
-        return numTeam;
-    }
-
-
-    public void clickItem(MouseEvent event) {
-        btnDelete.setDisable(false);
     }
 }

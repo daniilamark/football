@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="420.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MathController">
+<BorderPane prefHeight="420.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MathController">
    <center>
       <AnchorPane minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="776.0" styleClass="container" stylesheets="@../values/style.css">
          <children>
@@ -43,9 +43,12 @@
                   </TextField>
                </children>
             </VBox>
-            <TableView fx:id="tvMathTeam1" layoutX="370.0" layoutY="20.0" onMouseClicked="#clickItem" prefHeight="300.0" prefWidth="150.0" stylesheets="@../values/style.css">
+            <TableView fx:id="tvMath" layoutX="370.0" layoutY="20.0" onMouseClicked="#clickItem" prefHeight="300.0" prefWidth="594.0" stylesheets="@../values/style.css">
                <columns>
                   <TableColumn fx:id="colTeam1" prefWidth="150.0" text="Команда №1" />
+                  <TableColumn fx:id="colScore" prefWidth="117.0" text="Счёт" />
+                  <TableColumn fx:id="colTeam2" prefWidth="164.0" text="Команда №2" />
+                  <TableColumn fx:id="colData" prefWidth="153.0" text="Дата" />
                </columns>
             </TableView>
             <VBox layoutX="240.0" layoutY="20.0" prefHeight="65.0" prefWidth="80.0" spacing="10.0">
@@ -81,21 +84,6 @@
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="tvMathTeam2" layoutX="618.0" layoutY="20.0" onMouseClicked="#clickItem" prefHeight="300.0" prefWidth="150.0" stylesheets="@../values/style.css">
-               <columns>
-                  <TableColumn fx:id="colTeam2" prefWidth="150.0" text="Команда №2" />
-               </columns>
-            </TableView>
-            <TableView fx:id="tvMathScore" layoutX="528.0" layoutY="20.0" onMouseClicked="#clickItem" prefHeight="300.0" prefWidth="80.0" stylesheets="@../values/style.css">
-               <columns>
-                  <TableColumn fx:id="colScore" text="Счёт" />
-               </columns>
-            </TableView>
-            <TableView fx:id="tvMathData" layoutX="775.0" layoutY="20.0" onMouseClicked="#clickItem" prefHeight="300.0" prefWidth="150.0" stylesheets="@../values/style.css">
-               <columns>
-                  <TableColumn fx:id="colData" prefWidth="150.0" text="Дата" />
-               </columns>
-            </TableView>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

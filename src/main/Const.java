@@ -4,6 +4,7 @@ public class Const {
     public static final String UI_LOGIN = "../views/login.fxml";
     public static final String UI_CITY = "../views/ui_city";
     public static final String UI_MATH = "../views/ui_math";
+    public static final String UI_MATH2 = "../views/ui_math2";
     public static final String UI_USER_MATH = "../views/ui_user_math";
     public static final String UI_PLAYER = "../views/ui_player";
     public static final String UI_USER_PLAYER = "../views/ui_user_player";
