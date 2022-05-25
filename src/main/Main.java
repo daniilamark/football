@@ -1,6 +1,8 @@
 package main;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,8 +11,14 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.City;
+import model.User;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Main extends Application {
 
@@ -25,9 +33,6 @@ public class Main extends Application {
     // документация и презентация
     // бд в облаке и EXE файл
 
-
-    public static final String USERNAME = "admin";
-    public static final String PASSWORD = "1";
     private double x, y;
 
     @Override
@@ -73,4 +78,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch();
     }
+
 }

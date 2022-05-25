@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StadiumUserController">
+   <center>
+      <AnchorPane minHeight="400.0" minWidth="600.0" styleClass="container" stylesheets="@../values/style.css">
+         <children>
+            <TableView fx:id="tvStadium" layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="900.0" stylesheets="@../values/style.css">
+               <columns>
+                  <TableColumn fx:id="colCity" prefWidth="239.0" text="Город" />
+                  <TableColumn fx:id="colStadiumName" minWidth="0.0" prefWidth="224.0" text="Название" />
+                  <TableColumn fx:id="colCapacity" prefWidth="218.0" text="Вместимость" />
+                  <TableColumn fx:id="colTicketPrice" minWidth="0.0" prefWidth="198.0" text="Цена билета" />
+               </columns>
+            </TableView>
+         </children>
+
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </AnchorPane>
+   </center>
+</BorderPane>

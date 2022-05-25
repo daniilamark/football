@@ -125,7 +125,10 @@
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="135.0" prefWidth="350.0" styleClass="login-border">
                <children>
-                  <Label fx:id="lRegistration" onMouseClicked="#onClickRegistration" prefHeight="17.0" prefWidth="93.0" text="Нет аккаунта" textAlignment="CENTER" underline="true" />
+                  <Label fx:id="lUser" onMouseClicked="#onClickUser" prefHeight="21.0" prefWidth="53.0" text="Гость" textAlignment="CENTER" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
                </children>
                <opaqueInsets>
                   <Insets />

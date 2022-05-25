@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayerUserController">
+   <center>
+      <AnchorPane minHeight="400.0" minWidth="600.0" styleClass="container" stylesheets="@../values/style.css">
+         <children>
+            <TableView fx:id="tvPlayer" layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="900.0" stylesheets="@../values/style.css">
+               <columns>
+                  <TableColumn fx:id="colTeam" prefWidth="126.0" text="Команда" />
+                  <TableColumn fx:id="colFamily" prefWidth="116.0" text="Фамилия" />
+                  <TableColumn fx:id="colName" prefWidth="104.0" text="Имя" />
+                  <TableColumn fx:id="colLastName" prefWidth="109.0" text="Отчество" />
+                  <TableColumn fx:id="colAge" prefWidth="102.0" text="Возраст" />
+                  <TableColumn fx:id="colRole" prefWidth="99.0" text="Роль" />
+                  <TableColumn fx:id="colNumber" minWidth="0.0" prefWidth="105.0" text="Номер" />
+               </columns>
+            </TableView>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </AnchorPane>
+   </center>
+</BorderPane>

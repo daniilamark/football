@@ -36,7 +36,7 @@ public class MathController implements Initializable {
 
     @FXML private Button btnSelectTeam2;
 
-    @FXML private TableColumn<Math3, String> colDate;
+    @FXML private TableColumn<Math3, String> colData;
 
     @FXML private TableColumn<Math2, String> colScore;
 
@@ -142,7 +142,7 @@ public class MathController implements Initializable {
         showTeam1();
         showTeam2();
         showScore();
-        //showDate();
+        showDate();
     }
 
     public void showTeam1() {
@@ -178,7 +178,7 @@ public class MathController implements Initializable {
     public void showDate() {
         ObservableList<Math3> listDate = getDate();
 
-        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colData.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         tvMathData.setItems((ObservableList<Math3>) listDate);
     }
@@ -368,12 +368,14 @@ public class MathController implements Initializable {
     private void insertRecord(){
         if (Help.isFieldFill(tfTeam1) && Help.isFieldFill(tfTeam2) && Help.isFieldFill(tfScore) && Help.isFieldFill(dpDate)){
             String query = "INSERT INTO " + Const.MATH_TABLE + "("+ Const.MATH_TEAM_ID_1 + "," + Const.MATH_TEAM_ID_2 + "," + Const.MATH_DATE + "," + Const.MATH_SCORE +")"
-                    + " VALUES ('" + dbHandler.getIdFromName(tfTeam1.getText(), "team") +"'" + ","+"'" + dbHandler.getIdFromName(tfTeam2.getText(), "team") +"'" +"," +"'" + dpDate.getPromptText()+"'" +"," +"'" + tfScore.getText()+"')";
+                    + " VALUES ('" + dbHandler.getIdFromName(tfTeam1.getText(), "team") +"'" + ","+"'" + dbHandler.getIdFromName(tfTeam2.getText(), "team") +"'" +"," +"'" + dpDate.getValue()+"'" +"," +"'" + tfScore.getText()+"')";
+            System.out.println("testttttttttttt");
+            System.out.println(query);
             dbHandler.executeQuery(query);
             showTeam1();
             showTeam2();
             showScore();
-            //showDate();
+            showDate();
             tfTeam1.setText("");
             tfTeam2.setText("");
             dpDate.setValue(null);
@@ -393,7 +395,7 @@ public class MathController implements Initializable {
         showTeam1();
         showTeam2();
         showScore();
-        //showDate();
+        showDate();
         tfTeam1.setText("");
         tfTeam2.setText("");
         dpDate.setValue(null);
