@@ -2,6 +2,7 @@ package main;
 
 public class Const {
     public static final String UI_LOGIN = "../views/login.fxml";
+    public static final String UI_ADDADMIN = "../views/addAdmin.fxml";
     public static final String UI_CITY = "../views/ui_city";
     public static final String UI_MATH = "../views/ui_math";
     public static final String UI_MATH2 = "../views/ui_math2";
@@ -20,6 +21,11 @@ public class Const {
     public static final String CITY_ID = "city_id";
     public static final String CITY_NAME = "city_name";
 
+    public static final String USER_TABLE = "user";
+
+    public static final String USER_ID = "user_id";
+    public static final String USER_LOGIN = "login";
+    public static final String USER_PASSWORD = "password";
 
 
     public static final String MATH_TABLE = "math";

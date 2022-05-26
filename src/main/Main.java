@@ -1,8 +1,6 @@
 package main;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,24 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.City;
-import model.User;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Main extends Application {
 
     // TODO
-    // регистрация пользователей
-    // создание админов
-    // аунтификация
-    // доработать БД
-    // вью юзера
-    // доработать игроков бд и матчи
     // комментарии в код
     // документация и презентация
     // бд в облаке и EXE файл
@@ -43,12 +29,9 @@ public class Main extends Application {
         //stage.setScene(new Scene(root, 1315, 890));
         //stage.setMaximized(true);
 
-
         Parent root = FXMLLoader.load(getClass().getResource("../views/login.fxml"));
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(new Scene(root));
-
-
 
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -76,5 +59,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.Const;
 
 import java.io.IOException;
@@ -30,6 +32,7 @@ public class MainController implements Initializable {
     }
 
     @FXML private ImageView btnLogout;
+    @FXML private ImageView btnAddAdmin;
 
     @FXML private Label btn_city;
 
@@ -43,6 +46,7 @@ public class MainController implements Initializable {
 
     @FXML private Label btn_trainer;
 
+    private double x, y;
     private int numUI = 0;
 
     public int getNumUI() {
@@ -135,6 +139,22 @@ public class MainController implements Initializable {
         stage.setScene(new Scene(root));
         stage.getIcons().add(new Image("img/admin.png"));
         btnLogout.getScene().getWindow().hide();
+        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                x = mouseEvent.getSceneX();
+                y = mouseEvent.getSceneY();
+            }
+        });
+
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                stage.setX(mouseEvent.getScreenX() - x);
+                stage.setY(mouseEvent.getScreenY() - y);
+            }
+        });
+
         stage.show();
     }
 
@@ -151,7 +171,22 @@ public class MainController implements Initializable {
 
     public FXMLLoader getLoader(String ui) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(ui + ".fxml"));
-
         return loader;
+    }
+
+    @FXML
+    void onMouseClickedAddAdmin(MouseEvent event) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(Const.UI_ADDADMIN));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(new Scene(root));
+        stage.getIcons().add(new Image("img/admin.png"));
+        //btnAddAdmin.getScene().getWindow().hide();
+        stage.show();
     }
 }

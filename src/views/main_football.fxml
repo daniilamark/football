@@ -20,7 +20,12 @@
                   <Font name="Broadway" size="24.0" />
                </font>
             </Label>
-            <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="200.0" styleClass="line-color" stylesheets="@../values/style.css" HBox.hgrow="ALWAYS" />
+            <Pane maxHeight="-Infinity" prefHeight="2.0" prefWidth="400.0" styleClass="line-color" stylesheets="@../values/style.css" HBox.hgrow="ALWAYS" />
+            <ImageView fx:id="btnAddAdmin" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onMouseClickedAddAdmin" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+               <image>
+                  <Image url="@../img/addAdmin.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="btnLogout" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onMouseClickedLogout" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                <image>
                   <Image url="@../img/exit.png" />

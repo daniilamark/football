@@ -8,15 +8,11 @@ public class DBHandler extends ConfigsDb{
 
     public Connection getDBConnection() throws ClassNotFoundException, SQLException {
         String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
-
         // Class.forName("com.mysql.jdbc.Driver");
-
         dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
 
         return dbConnection;
     }
-
-
 
     public void executeQuery(String query) {
         Connection conn = null;
@@ -83,5 +79,4 @@ public class DBHandler extends ConfigsDb{
         }
         return id;
     }
-
 }
