@@ -37,19 +37,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../views/main_football.fxml"));
-        stage.setTitle("Панель организатора");
+        //Parent root = FXMLLoader.load(getClass().getResource("../views/main_football.fxml"));
+        //stage.setTitle("Панель организатора");
         stage.getIcons().add(new Image("img/admin.png"));
-        stage.setScene(new Scene(root, 1315, 890));
-        stage.setMaximized(true);
+        //stage.setScene(new Scene(root, 1315, 890));
+        //stage.setMaximized(true);
 
 
-        //Parent root = FXMLLoader.load(getClass().getResource("../views/login.fxml"));
-        //stage.initStyle(StageStyle.TRANSPARENT);
-        // stage.setScene(new Scene(root));
+        Parent root = FXMLLoader.load(getClass().getResource("../views/login.fxml"));
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(new Scene(root));
 
 
-        /*
+
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -65,8 +65,6 @@ public class Main extends Application {
                 stage.setY(mouseEvent.getScreenY() - y);
             }
         });
-
-         */
 
         stage.show();
     }
