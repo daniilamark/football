@@ -14,9 +14,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.Const;
+import main.DBHandler;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -31,6 +34,7 @@ public class MainController implements Initializable {
         SelectCityController.mainController = this; //////////////////////
     }
 
+    @FXML private ImageView btnExport;
     @FXML private ImageView btnLogout;
     @FXML private ImageView btnAddAdmin;
 
@@ -45,7 +49,7 @@ public class MainController implements Initializable {
     @FXML private Label btn_team;
 
     @FXML private Label btn_trainer;
-
+    DBHandler dbHandler = new DBHandler();
     private double x, y;
     private int numUI = 0;
 
@@ -189,4 +193,35 @@ public class MainController implements Initializable {
         //btnAddAdmin.getScene().getWindow().hide();
         stage.show();
     }
+
+    @FXML
+    void onMouseClickedExport(MouseEvent event) {
+        exportTables();
+    }
+
+
+    public void exportTables(){
+
+        Connection conn = null;
+        try {
+            conn = dbHandler.getDBConnection();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String query = "SELECT * FROM city INTO OUTFILE '/tmp/name_file.csv' FIELDS TERMINATED BY ';'";
+        dbHandler.executeQuery(query);
+        System.out.println(query);
+        System.out.println("lol2");
+        ///////////////////////////////////////////////
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ///////////////////////////////////////////////
+    }
+
 }
